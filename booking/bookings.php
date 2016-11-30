@@ -31,8 +31,8 @@ function getServices() {
 				<div class="thumbnail">
 					<img src="http://placehold.it/242x200" alt="placeholder">
 					<h3><?php echo $row["serviceName"];?></h3>
-					<p><?php echo "Företag: ". $company; ?></p>
-					<p><a href="#" class="btn btn-default" role="button">Boka</a></p>
+					<p><?php echo "Company: ". $company; ?></p>
+					<p><a href="#" class="btn btn-default" role="button">Book</a></p>
 				</div>
 			</div>
 			<?php 
