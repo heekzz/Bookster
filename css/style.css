@@ -9,6 +9,11 @@ body {
     /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
+.bookingobject {
+
+}
+
+
 .header-image {
     display: block;
     width: 100%;
@@ -106,9 +111,7 @@ footer {
 }
 
 @media(max-width:768px) {
-    .container {
-        margin: 0 15px;
-    }
+    
 }
 
 @media(max-width:668px) {
@@ -130,9 +133,26 @@ footer {
     .headline h2 {
         font-size: 30px;
     }
+    
+    body .searchbargroup {
+        margin-bottom: 15px;
+        padding: 0 0 0 0;
+    }
+
+    .searchbar {
+        height: 34px;
+    }
 }
 
 .bars-text-inverted {
     vertical-align: middle;
     margin-right: 10px;
+}
+.searchbargroup {
+    margin-bottom: 15px;
+    padding: 0 25% 0 25%;
+}
+
+.searchbar {
+    height: 50px;
 }

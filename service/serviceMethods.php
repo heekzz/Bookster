@@ -12,35 +12,33 @@ if (mysqli_connect_errno()) {
 	die("Connection failed: " . mysqli_connect_error());
 }
 
+if(isset($_POST['action']) && !empty($_POST['action'])) {
+	if (isset($_POST['serviceid']) && !empty($_POST['serviceid'])) {
+		$serviceid = $_POST['serviceid'];
+		$username = $_POST['username'];
+		$username = mysql_real_escape_string($username);
+		switch ($_POST['action']) {
+			case 'addService':
+			$query = 'INSERT INTO User_Service VALUES ('.$serviceid.',"'.$username.'");';
+			$result = mysqli_query($conn, $query);
+			echo "Success add";
+			break;
 
-function listAllCompanies() {
-	global $conn;
-	$query = "SELECT * FROM Company;";
-	$result = mysqli_query($conn, $query);
+			case 'removeService':
+			$query = 'DELETE FROM User_Service WHERE service='.$serviceid.' AND username="'.$username.'";';
+			mysqli_query($conn, $query);
+			echo "Success remove";
+			break;
 
-	if (mysqli_num_rows($result) > 0) {
-		while ($row = mysqli_fetch_assoc($result)) {
-			$companyName = $row['companyName'];
-			$description = $row['description'];
-			$img = "http://placehold.it/242x200";
-			?>
-			<div class="media">
-				<div class="media-left">
-					<a href="#">
-					<img class="media-object" src=<?php echo "\"".$img."\""; ?> alt="placeholder">
-					</a>
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading"><?php echo $companyName ?></h4>
-					<?php echo $description; ?>
-					<button type="button" class="btn btn-primary pull-right">Visa bokningsobjekt</button>
-				</div>
-			</div>
-			<?php
+			default:
+			# code...
+			break;
 		}
-
 	} else {
-		echo "Didn't find any companies";
+		echo "serviceid not set";
 	}
+} else {
+	echo "action not set";
 }
+
 ?>
