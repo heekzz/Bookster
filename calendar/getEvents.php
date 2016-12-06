@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+date_default_timezone_set('UTC');
+
 $servername = "155.4.151.120";
 $db_user = "bookster";
 $db_pw = "bokanu";
@@ -30,18 +32,29 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 	$e['id'] = $row['id'];
 	$e['title'] = $row['title'];
-	$e['allDay'] = $row['allDay'];
-	$e['startDate'] = $row['startDate'];
-	echo "Start date: " . $e['startDate'] ."<br>";
-	echo "Start date UTC: " . gmdate("Y-m-dTH:i:s", $e['startDate']) ."<br>";
-	echo "End date: " . $e['endDate'] . "<br>";
-	echo "End date UTC: " . gmdate("Y-m-dTH:i:s", $e['endDate']) ."<br>";
-	$e['endDate'] = $row['endDate'];
+	$allDay = ($row['allDay'] == "true") ? true : false;
+	$e['allDay'] = $allDay;
+	$e['start'] = $row['startDate'];
+	$e['end'] = $row['endDate'];
 
 	// Merge the event array into the return array
 	array_push($events, $e);
 }
 
 echo json_encode($events);
-exit();
+
+
+function parseDateTime($string, $timezone=null) {
+	$date = new DateTime(
+		$string,
+		$timezone ? $timezone : new DateTimeZone('UTC')
+			// Used only when the string is ambiguous.
+			// Ignored if string has a timezone offset in it.
+		);
+	if ($timezone) {
+		// If our timezone was ignored above, force it.
+		$date->setTimezone($timezone);
+	}
+	return $date;
+}
 ?>

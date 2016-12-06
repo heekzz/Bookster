@@ -30,9 +30,9 @@
         $(document).ready(function() {
 
             $('#calendar').fullCalendar({
-                events: 'getEvents.php'
+                events: 'getEvents.php',
+                timeFormat: 'HH:mm'
             })
-
         });
     </script>
 
@@ -69,7 +69,7 @@
                     <?php
                     if($_SESSION['loggedin'] == false) { 
                     ?>
-                    <form class="navbar-form navbar-right" method="post" action="login.php">
+                    <form class="navbar-form navbar-right" method="post" action="../login.php">
                         <div class="form-group">
                             <input type="text" name="username" class="form-control" placeholder="Username" required="true">
                             <input type="password" name="password" class="form-control" placeholder="Password" required="true">
@@ -87,7 +87,7 @@
                     <li><a href="#">Mina inställningar</a></li>
                 </ul>
 
-                <form class="navbar-right navbar-form" method="post" action="login.php">
+                <form class="navbar-right navbar-form" method="post" action="../login.php">
                     <span>Inloggad som <?php echo $_SESSION['username']?>!</span>
                     <button type="submit" name="logout" class="btn btn-default">Logga ut</button>
                 </form>
@@ -101,10 +101,11 @@
 <!-- Navbar default -->
 
 <!-- Main content -->
-<h1>Din bokningar</h1>
-<div id="calendar">
+<button class="btn btn-default btn-success" type="button" name="export">Exportera kalender</button>
+<br>
+<br>
 
-</div>
+<div id="calendar"></div>
 
 </div>
 <!-- Container -->

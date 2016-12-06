@@ -32,7 +32,7 @@ function getServices() {
 					<img src="http://placehold.it/242x200" alt="placeholder">
 					<h3 class="bookingtext"><?php echo $row["serviceName"];?></h3>
 					<p class="bookingtext"><?php echo "Företag: ". $company; ?></p>
-					<p><a href="#" class="btn btn-default" role="button">Boka</a></p>
+					<p><a href=<?php echo '"booking/makeBooking.php?serviceid=' . $row['id'] . '"'; ?> class="btn btn-default" role="button">Boka</a></p>
 				</div>
 			</div>
 			<?php 

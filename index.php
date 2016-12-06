@@ -97,10 +97,14 @@
             </div>
             <div class="row">
                 <?php
-                include('bookings.php');
+                include('booking/bookings.php');
                 getServices();
                 ?>
             </div>
+            <?php
+        } else {
+            ?>
+
             <?php
         }
         ?>

@@ -71,7 +71,7 @@
 
 						<ul class="nav navbar-nav">
 							<li><a href="service.php">Lägg till/ta bort bokningsobjekt</a></li>
-							<li><a href="calendar/showCalendar.php">Kalender</a></li>
+							<li><a href="../calendar/showCalendar.php">Kalender</a></li>
 							<li><a href="#">Mina inställningar</a></li>
 						</ul>
 

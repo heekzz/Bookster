@@ -104,36 +104,37 @@
 
             $query = "SELECT * FROM Company;";
             $result = mysqli_query($conn, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $companyName = $row['companyName'];
-                    $description = $row['description'];
-                    $companyid = $row['id'];
-                    $img = "http://placehold.it/242x200";
-                    ?>
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
+            ?>
+            <h1>Tillgängliga företag och föreningar</h1>
+            <hr>
+            <div class="row">
+                <?php
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $companyName = $row['companyName'];
+                        $description = $row['description'];
+                        $companyid = $row['id'];
+                        $img = "http://placehold.it/242x200";
+                        ?>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="thumbnail">
                                 <img class="media-object" src=<?php echo "'".$img."';" ?> alt="placeholder" >
-                            </a>
+                                <h3><?php echo $companyName ?></h3>
+                                <p><?php echo $description; ?> </p>
+                                <p><a role="button" class="btn btn-primary" href=<?php echo '"addService.php?companyid=' . $companyid . '"'; ?> >Visa bokningsobjekt</a></p>
+                            </div>
                         </div>
-                        <div class="media-body">
-                            <h4 class="media-heading"><?php echo $companyName ?></h4>
-                            <?php echo $description; ?>
-                            <a role="button" class="btn btn-primary pull-right" href=<?php echo '"addService.php?companyid=' . $companyid . '"'; ?> >Visa bokningsobjekt</a>
-                        </div>
-                    </div>
-                    <?php
-                }
+                        <?php
+                    }
 
+                } else {
+                    echo "Didn't find any companies ";
+                }
             } else {
-                echo "Didn't find any companies ";
+                echo "<p>Not logged in!</p>";
             }
-        } else {
-            echo "<p>Not logged in!</p>";
-        }
-        ?>
+            ?>
+        </div>
 
 
 
