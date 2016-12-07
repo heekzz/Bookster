@@ -11,11 +11,18 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
 
+    <!-- Footer stylesheet -->
+    <link href="css/footer.css" rel="stylesheet">
+
     <!-- Custom stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
     <!-- Custom script -->
     <script type="text/javascript" src="js/script.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -88,37 +95,132 @@
         <!-- Navbar default -->
 
         <!-- Main content -->
-        <?php
-        if($_SESSION['loggedin'] == true) {
-            ?>
-            <div class="input-group searchbargroup">
-                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                <input type="text" class="form-control searchbar" id="searchAndHide" onkeyup="search()" placeholder="Sök efter objekt..." aria-describedby="basic-addon1">
-            </div>
-            <div class="row">
-                <?php
-                include('booking/bookings.php');
-                getServices();
+        <div class="container-fluid">
+            <?php
+            if($_SESSION['loggedin'] == true) {
                 ?>
+                <div class="input-group searchbargroup">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                    <input type="text" class="form-control searchbar" id="searchAndHide" onkeyup="search()" placeholder="Sök efter objekt..." aria-describedby="basic-addon1">
+                </div>
+                <div class="row">
+                    <?php
+                    include('booking/bookings.php');
+                    getServices();
+                    ?>
+                </div>
+                <?php
+            } else {
+                ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Välkommen till Bookster!</h1>
+                    </div>
+                    <div class="panel-body">
+                        <p>Vänligen logga in ovan.</p>
+                    </div>
+                </div>
+                <hr>
+                <div id="slides" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                      <li data-target="#slides" data-slide-to="0" class="active"></li>
+                      <li data-target="#slides" data-slide-to="1"></li>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                      <img src="img/cal1.jpg" alt="Bok">
+                      <div class="carousel-caption">
+                        <h1>Samla alla bokingar på ett och samma ställe</h1>
+                    </div>
+                </div>
+                <div class="item">
+                  <img src="img/cal2.jpg" alt="Skriva">
+                  <div class="carousel-caption">
+                    <h1>Var produktiv</h1>
+                </div>
             </div>
-            <?php
-        } else {
-            ?>
+        </div>
 
-            <?php
-        }
-        ?>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#slides" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#slides" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <?php
+}
+?>
 
+</div><!-- Container-fluid (main content) -->
+</div><!-- Container -->
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>Bookster<span>.se</span></h3>
+
+        <p class="footer-links">
+            <a href="#">Hem</a>
+            ·
+            <a href="#">Om företaget</a>
+            ·
+            <a href="#">Kontakt</a>
+        </p>
+
+        <p class="footer-company-name">Bookster &copy; 2016</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Studievägen 9A</span> 583 29 Linköping, Sverige</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+46 70-111 22 33</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:mail@bookster.se">mail@bookster.se</a></p>
+        </div>
 
     </div>
-    <!-- Container -->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js "></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript" src="js/script.js"></script>
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>Om företaget</span>
+            Bookster är en bokningstjänst online där du kan boka alla dina lokaler eller aktiviteter på en och samma tjänst
+        </p>
+
+        <div class="footer-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src=" https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js "></script>
+<!-- Custom scripts -->
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>

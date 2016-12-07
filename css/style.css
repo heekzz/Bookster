@@ -9,8 +9,8 @@ body {
     /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-.bookingobject {
-
+.bookingobject {    
+    
 }
 
 
@@ -86,11 +86,6 @@ body {
     font-size: 60px;
 }
 
-.reveal {}
-
-footer {
-    margin: 50px 0;
-}
 
 @media(max-width:1200px) {
     .headline h1 {
@@ -111,7 +106,7 @@ footer {
 }
 
 @media(max-width:768px) {
-    
+
 }
 
 @media(max-width:668px) {

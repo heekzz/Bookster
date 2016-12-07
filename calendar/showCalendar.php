@@ -14,6 +14,9 @@
     <!-- Custom stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
 
+    <!-- Footer stylesheet -->
+    <link href="../css/footer.css" rel="stylesheet">
+
     <!-- FullCalendar stylesheet -->
     <link href="../css/fullcalendar.min.css" rel="stylesheet">
 
@@ -22,6 +25,8 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src=" https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
     <!-- FullCalendar scriptfiles -->
     <script src="../js/fullcalendar.min.js"></script>
@@ -109,6 +114,60 @@
 
 </div>
 <!-- Container -->
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>Bookster<span>.se</span></h3>
+
+        <p class="footer-links">
+            <a href="#">Hem</a>
+            ·
+            <a href="#">Om företaget</a>
+            ·
+            <a href="#">Kontakt</a>
+        </p>
+
+        <p class="footer-company-name">Bookster &copy; 2016</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Studievägen 9A</span> 583 29 Linköping, Sverige</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+46 70-111 22 33</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:mail@bookster.se">mail@bookster.se</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>Om företaget</span>
+            Bookster är en bokningstjänst online där du kan boka alla dina lokaler eller aktiviteter på en och samma tjänst
+        </p>
+
+        <div class="footer-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+        </div>
+
+    </div>
+
+</footer>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../js/bootstrap.min.js "></script>

@@ -14,11 +14,16 @@
     <!-- Custom stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
 
+    <!-- Footer stylesheet -->
+    <link href="../css/footer.css" rel="stylesheet">
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src=" https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
 
     <!-- Custom script -->
     <script type="text/javascript" src="../js/script.js"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,106 +96,160 @@
         <!-- Navbar default -->
 
         <!-- Main content -->
-        <?php 
-        if ($_SESSION['loggedin'] == true) {
-            ?>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <?php  
-                    $servername = "155.4.151.120";
-                    $db_user = "bookster";
-                    $db_pw = "bokanu";
-                    $db_name = "bookster";
+        <div class="container-fluid">
+            <?php 
+            if ($_SESSION['loggedin'] == true) {
+                ?>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <?php  
+                        $servername = "155.4.151.120";
+                        $db_user = "bookster";
+                        $db_pw = "bokanu";
+                        $db_name = "bookster";
 
                 // Create connection
-                    $conn = mysqli_connect($servername, $db_user, $db_pw, $db_name);
+                        $conn = mysqli_connect($servername, $db_user, $db_pw, $db_name);
 
                 // Check connection
-                    if (mysqli_connect_errno()) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    }
+                        if (mysqli_connect_errno()) {
+                            die("Connection failed: " . mysqli_connect_error());
+                        }
 
-                    $img = "http://placehold.it/400x400";
 
-                    if(isset($_GET['serviceid']) && !empty($_GET['serviceid'])) {
+                        if(isset($_GET['serviceid']) && !empty($_GET['serviceid'])) {
 
-                        $serviceid = $_GET['serviceid'];
+                            $serviceid = $_GET['serviceid'];
 
-                        $query = "SELECT * FROM Service WHERE id=" . $serviceid;
+                            $query = "SELECT * FROM Service WHERE id=" . $serviceid;
 
-                        $result = mysqli_query($conn, $query);
-                        $service = mysqli_fetch_assoc($result);
+                            $result = mysqli_query($conn, $query);
+                            $service = mysqli_fetch_assoc($result);
+                            ?>
+                            <img src=<?php echo '"'. $service['img'] . '"' ?> class="img-responsive img-rounded" alt=<?php echo '"' . $service['serviceName'] . '"'; ?> >
+                        </div>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <h1><?php echo $service['serviceName']; ?></h1>
+                            <p><?php echo $service['description']; ?></p>
+                        </div>
+                    </div><!-- Row -->
+                    <br>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Tid</th>
+                            <th>Status</th>
+                            <th>Boka</th>
+                        </tr>
+                        <?php
+                        $hour = 12; 
+                        for ($i=0; $i < 10; $i++) { 
+                            $time = $hour . ':00 - ' . ++$hour . ':00';
+                            echo '<tr>';
+                            echo '<th id="time">' . $time . '</th>';
+                            echo '<th>Ledig</th>';
+                            echo '<th><button type="button" class="btn btn-success" data-time="'.$time.'" data-toggle="modal" data-service="'.$service['serviceName'].'" data-target="#myModal">Boka objekt</button>';
+                            echo '</tr>';
+                        }
                         ?>
-                        <img src=<?php echo '"'. $img . '"' ?> class="img-responsive img-circle" alt=<?php echo '"' . $service['serviceName'] . '"'; ?> >
-                    </div>
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <h1><?php echo $service['serviceName']; ?></h1>
-                        <p><?php echo $service['description']; ?></p>
-                    </div>
-                </div><!-- Row -->
-                <br>
-                <table class="table table-hover">
-                    <tr>
-                        <th>Tid</th>
-                        <th>Status</th>
-                        <th>Boka</th>
-                    </tr>
+                    </table>
+                    <!-- Button trigger modal -->
+                    <p></p>
+
                     <?php
-                    $hour = 12; 
-                    for ($i=0; $i < 10; $i++) { 
-                        $time = $hour . ':00 - ' . ++$hour . ':00';
-                        echo '<tr>';
-                        echo '<th id="time">' . $time . '</th>';
-                        echo '<th>Ledig</th>';
-                        echo '<th><button type="button" class="btn btn-success" data-time="'.$time.'" data-toggle="modal" data-service="'.$service['serviceName'].'" data-target="#myModal">Boka objekt</button>';
-                        echo '</tr>';
-                    }
-                    ?>
-                </table>
-                <!-- Button trigger modal -->
-                <p></p>
-
-                <?php
+                } else {
+                    die("<p>Serviceid not set</p>");
+                }
             } else {
-                die("<p>Serviceid not set</p>");
+                echo "<p> Not logged in!</p>";
             }
-        } else {
-            echo "<p> Not logged in!</p>";
-        }
-        ?>
+            ?>
 
-        <!-- Modal -->
-        <div  id="myModal" class="modal fade" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <p id="time"></p>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Bjud in vänner till din bokning via e-post. Separera flera adresser med ;</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ex. namn1@mail.se;namn2@mail.se">
-                  </div>
-                  <div class="form-group">
-                    <label for="message">Meddelande</label>
-                    <textarea type="input" class="form-control" id="message" rows="5" placeholder="Meddelande"></textarea>
+            <!-- Modal -->
+            <div  id="myModal" class="modal fade" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
                 </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
-            <button type="button" class="btn btn-primary">Bekräfta bokning</button>
-        </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+                <div class="modal-body">
+                    <form>
+                        <p id="time"></p>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Bjud in vänner till din bokning via e-post. Separera flera adresser med ;</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ex. namn1@mail.se;namn2@mail.se">
+                      </div>
+                      <div class="form-group">
+                        <label for="message">Meddelande</label>
+                        <textarea type="input" class="form-control" id="message" rows="5" placeholder="Meddelande"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+                <button type="button" class="btn btn-primary">Bekräfta bokning</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
+</div>
 </div>
 <!-- Container -->
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>Bookster<span>.se</span></h3>
+
+        <p class="footer-links">
+            <a href="#">Hem</a>
+            ·
+            <a href="#">Om företaget</a>
+            ·
+            <a href="#">Kontakt</a>
+        </p>
+
+        <p class="footer-company-name">Bookster &copy; 2016</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Studievägen 9A</span> 583 29 Linköping, Sverige</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+46 70-111 22 33</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:mail@bookster.se">mail@bookster.se</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>Om företaget</span>
+            Bookster är en bokningstjänst online där du kan boka alla dina lokaler eller aktiviteter på en och samma tjänst
+        </p>
+
+        <div class="footer-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+        </div>
+
+    </div>
+
+</footer>
 
 <script>
     $('#myModal').on('show.bs.modal', function (event) {
