@@ -44,7 +44,7 @@ function login() {
 		session_start();
 		$_SESSION['loggedin'] = true;
 		$_SESSION['username'] = $username;
-		header('Location: http://fredrikhakansson.se/bookster/index.php');  
+		header('Location: index.php');  
 	}
 }
 
